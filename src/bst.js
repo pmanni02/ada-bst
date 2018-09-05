@@ -12,6 +12,10 @@ class BST {
   search(val){
 
   }
+
+  inOrderPrint(){
+    
+  }
 }
 
 module.exports = BST;

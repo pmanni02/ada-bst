@@ -43,4 +43,26 @@ describe('bst.js', function(){
       assert.isTrue(myBST.search(8));
     });
   });
+
+  describe('insert(val)', function(){
+
+  });
+
+  describe('inOrderPrint()', function(){
+    it('should print empty str if bst is empty', function(){
+      assert.equal(myBST.inOrderPrint(), "");
+    });
+
+    it('should correctly print a 1 node tree', function(){
+      myBST.insert(1);
+      assert.equal(myBST.inOrderPrint(), "1 ");
+    });
+
+    it('should correctly print a >1 node tree', function(){
+      myBST.insert(5);
+      myBST.insert(7);
+      myBST.insert(3);
+      assert.equal(myBST.inOrderPrint(), "3 5 7 ");
+    });
+  });
 });
