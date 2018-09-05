@@ -1,11 +1,17 @@
 const Node = require('./node');
 
-class Bst {
+class BST {
   constructor(){
     this.root = null;
   }
 
+  insert(val){
 
+  }
+
+  search(val){
+
+  }
 }
 
-module.exports = Bst;
+module.exports = BST;
