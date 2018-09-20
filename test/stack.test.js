@@ -1,5 +1,6 @@
 const assert = require('chai').assert;
 const Stack = require('../src/stack');
+const Node = require('../src/node');
 
 describe('Stack.js', function(){
   it('initializes an empty stack', function(){
@@ -46,6 +47,7 @@ describe('Stack.js', function(){
     it('returns the correct value', function(){
       myStack.push(1);
       const result = myStack.pop();
+      assert.instanceOf(result, Node);
       assert.equal(result.value, 1);
     });
   });

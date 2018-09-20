@@ -6,7 +6,7 @@ class Stack {
   }
 
   empty(){
-    if(this.top.head == null){
+    if(this.top.head === null){
       return true;
     }
     return false;

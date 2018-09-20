@@ -1,4 +1,5 @@
 const Node = require('./node');
+const Stack = require('./stack');
 
 class BST {
   constructor(){
@@ -6,65 +7,82 @@ class BST {
   }
 
   insert(val){
+    let newNode = new Node(val);
+    // console.log(`New Node: ${newNode.value}`);
+
     if(this.root == null){
-      this.root = new Node(val);
-    } else {
-      this.insertRecursive(this.root, new Node(val));
+      this.root = newNode;
+      return;
     }
 
+    let currNode = this.root;
+    let parentNode = null;
+    while(currNode !== null){
+      parentNode = currNode;
+      if(newNode.value <= currNode.value){
+        currNode = currNode.left;
+      } else {
+        currNode = currNode.right;
+      }
+    }
+
+    if(newNode.value <= parentNode.value){
+      parentNode.left = newNode;
+    } else {
+      parentNode.right = newNode;
+    }
     return this.root;
   }
 
-  insertRecursive(currNode, newNode){
-    if(newNode.value <= currNode.value){
-      if(currNode.left === null){
-        currNode.left = newNode;
-        return;
-      } else {
-        this.insertRecursive(currNode.left, newNode);
+  search(val){
+    let currNode = this.root;
+
+    while(currNode !== null){
+      if(currNode.value === val){
+        return true;
       }
-    } else {
-      if(currNode.right === null){
-        currNode.right = newNode;
-        return;
+      if(val < currNode.value){
+        currNode = currNode.left;
       } else {
-        this.insertRecursive(currNode.right, newNode);
+        currNode = currNode.right;
       }
     }
+    return false;
   }
-
-  // search(val){
-  //
-  // }
 
   inOrderPrint(){
-    let printedVals = "";
-    if(this.root == null){
-      return printedVals;
-    }
-    return this.inOrderPrintRecursive(this.root, printedVals);
-  }
-
-  inOrderPrintRecursive(root, result){
-    if(root === null){
-      return result;
-    }
-
-    if(root.left != null){
-      result = this.inOrderPrintRecursive(root.left);
+    let myStack = new Stack();
+    let currNode = this.root;
+    let result = "";
+    while(currNode !== null || myStack.empty() === false){
+      if(currNode !== null){
+        myStack.push(currNode);
+        currNode = currNode.left;
+      } else if (myStack.empty() === false){
+        currNode = myStack.pop();
+        result += `${currNode.value.value} `;
+        currNode = currNode.value.right;
+      }
     }
 
-    result += `${root.value} `;
-
-    if(root.right != null){
-      result = this.inOrderPrintRecursive(root.right);
-    }
     return result;
+  }
 
+  breadthFirstTraversal(){
 
   }
 
+  height(){
+    
+  }
 
 }
 
 module.exports = BST;
+
+// let bst = new BST();
+// bst.insert(5);
+// bst.insert(8);
+// bst.insert(1);
+// let result = bst.inOrderPrint();
+// console.log(result);
