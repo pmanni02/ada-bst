@@ -1,5 +1,6 @@
 const Node = require('./node');
 const Stack = require('./stack');
+const Queue = require('./queue');
 
 class BST {
   constructor(){
@@ -73,7 +74,32 @@ class BST {
   }
 
   height(){
-    
+    let myQueue = new Queue();
+    let height = 0;
+    let nodeCount = 0;
+    if(this.root == null){
+      return height;
+    }
+
+    myQueue.enqueue(this.root);
+    nodeCount = 1;
+    while(nodeCount > 0){
+      height ++;
+      let newCount = 0;
+      for(let i=0; i< nodeCount; i++){
+        let node = myQueue.dequeue();
+        if(node.value.right){
+          myQueue.enqueue(node.value.right);
+          newCount++;
+        } else if (node.value.left){
+          myQueue.enqueue(node.value.left);
+          newCount++;
+        }
+        nodeCount--;
+      }
+      nodeCount = newCount;
+    }
+    return height;
   }
 
 }
