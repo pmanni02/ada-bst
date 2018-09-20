@@ -117,4 +117,27 @@ describe('bst.js', function(){
     });
   });
 
+  describe('height()', function(){
+    it('should return 0 if bst is empty', function(){
+      const height = myBST.height();
+      assert.equal(height, 0);
+    });
+
+    it('should return 1 for one node bst', function(){
+      myBST.insert(5);
+      assert.equal(myBST.height(), 1);
+    });
+
+    it('should return correct height for balanced tree', function(){
+      myBST.insert(5);
+      myBST.insert(2);
+      myBST.insert(11);
+      myBST.insert(-4);
+      myBST.insert(19);
+      myBST.insert(8);
+      myBST.insert(4);
+      assert.equal(myBST.height(), 3);
+    });
+  });
+
 });
